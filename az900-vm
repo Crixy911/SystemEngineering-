@@ -1,0 +1,75 @@
+al_don7 [ ~ ]$ az account set --subscription 'Azure subscription 1'
+al_don7 [ ~ ]$ az group create --location UAENORTH --name 'az900-rg' 
+{
+  "id": "/subscriptions/62afb44b-4a7a-4782-9f82-e7c371cf64c4/resourceGroups/az900-rg",
+  "location": "uaenorth",
+  "managedBy": null,
+  "name": "az900-rg",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+al_don7 [ ~ ]$ az vm create --name az90demovm --resource-group az900-rg --image Ubuntu2204 --generate-ssh-keys
+/usr/lib64/az/lib/python3.9/site-packages/paramiko/pkey.py:100: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from this module in 48.0.0.
+  "cipher": algorithms.TripleDES,
+/usr/lib64/az/lib/python3.9/site-packages/paramiko/transport.py:259: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from this module in 48.0.0.
+  "class": algorithms.TripleDES,
+SSH key files '/home/al_don7/.ssh/id_rsa' and '/home/al_don7/.ssh/id_rsa.pub' have been generated under ~/.ssh to allow SSH access to the VM. If using machines without permanent storage, back up your keys to a safe location.
+{
+  "fqdns": "",
+  "id": "/subscriptions/62afb44b-4a7a-4782-9f82-e7c371cf64c4/resourceGroups/az900-rg/providers/Microsoft.Compute/virtualMachines/az90demovm",
+  "location": "uaenorth",
+  "macAddress": "60-45-BD-69-F0-1E",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "74.243.238.128",
+  "resourceGroup": "az900-rg",
+  "zones": ""
+}
+al_don7 [ ~ ]$ ssh al_don7@74.243.238.128
+The authenticity of host '74.243.238.128 (74.243.238.128)' can't be established.
+ED25519 key fingerprint is SHA256:dahGEfh37xySC45HmCCsZV73GFzUGLmgOOw1l0z3GFQ.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '74.243.238.128' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 6.5.0-1025-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Fri Nov  8 19:28:03 UTC 2024
+
+  System load:  0.08              Processes:             102
+  Usage of /:   5.2% of 28.89GB   Users logged in:       0
+  Memory usage: 8%                IPv4 address for eth0: 10.0.0.4
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+al_don7@az90demovm:~$ exit
+logout
+Connection to 74.243.238.128 closed.
+al_don7 [ ~ ]$ 
